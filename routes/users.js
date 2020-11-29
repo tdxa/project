@@ -44,25 +44,36 @@ router.post('/register', (req, res) => {
         //validation passed
         //res.send('pass');
         User.findOne({ email: email }).then(user => {
-                if (user) {
-                    errors.push({ msg: 'Email is already registered!' });
-                    res.render('register', {
-                        errors,
-                        name,
-                        email,
-                        password
-                    });
-                } else {
-                    const newUser = new User({
-                        name,
-                        email,
-                        password
-                    });
+            if (user) {
+                errors.push({ msg: 'Email is already registered!' });
+                res.render('register', {
+                    errors,
+                    name,
+                    email,
+                    password
+                });
+            } else {
+                const newUser = new User({
+                    name,
+                    email,
+                    password
+                });
 
-                    console.log(newUser);
-                    res.send('hello');
-                }
-            })
+                //Hash password
+                bcrypt.genSalt(10, (error, salt) =>
+                    bcrypt.hash(newUser.password, salt, (error, hash) => {
+                        if (error) throw error;
+
+                        newUser.password = hash;
+
+                        //Save to database
+                        newUser.save()
+                            .then(user => {
+                                res.redirect('/users/login')
+                            }).catch(err => console.log(err))
+                    }));
+            }
+        });
     }
 });
 
