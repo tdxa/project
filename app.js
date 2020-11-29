@@ -4,6 +4,9 @@ const app = express();
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport')
+
+require('./config/passport')(passport);
 
 //database config
 const db = require('./config/keys').MongooseURI;
@@ -25,12 +28,16 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 //Connect flash
 app.use(flash());
 
 //Global variables
-app.use((req,res,next) => {
-    res.locals.succes_msg = req.flash('success_msg');
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     next();
 });
