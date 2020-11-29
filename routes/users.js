@@ -69,14 +69,14 @@ router.post('/register', (req, res) => {
                         //Save to database
                         newUser.save()
                             .then(user => {
-                                res.redirect('/users/login')
-                            }).catch(err => console.log(err))
+                                req.flash('success_msg', 'You are now registered. You can log in! :)');
+                                res.redirect('/users/login');
+                            })
+                            .catch(err => console.log(err));
                     }));
             }
         });
     }
 });
-
-
 
 module.exports = router;
