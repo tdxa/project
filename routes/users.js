@@ -50,8 +50,7 @@ router.post('/register', (req, res) => {
                 res.render('register', {
                     errors,
                     name,
-                    email,
-                    password
+                    email
                 });
             } else {
                 const newUser = new User({
@@ -71,7 +70,7 @@ router.post('/register', (req, res) => {
                         newUser.save()
                             .then(user => {
                                 req.flash('success_msg', 'You are now registered. You can log in! :)');
-                                res.redirect('/login');
+                                res.redirect('/users/login');
                             })
                             .catch(err => console.log(err));
                     }));
