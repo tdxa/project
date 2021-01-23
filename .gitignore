@@ -124,4 +124,7 @@ dist
 .history
 .ionide
 
+config/keys.js
+images/
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node
