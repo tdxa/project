@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const passport = require("passport");
+
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const mongoose = require('mongoose');
 
 //user model
-const User = require("../models/User");
+const User = require('../models/User');
+const { db } = require('../models/User');
 
 //Login Page
 router.get("/login", (req, res) => res.render("login"));
@@ -102,5 +105,16 @@ router.get("/logout", (req, res) => {
 
   res.redirect("/users/login");
 });
+
+router.get('/delete', (req, res) => {
+    User.findOneAndDelete(
+        {
+            _id: mongoose.Types.ObjectId(req.user.id)
+        }
+    ).then(x => {
+        req.flash('success_msg', 'You have successfully deleted your account');
+        res.redirect('/');
+    })
+})
 
 module.exports = router;
