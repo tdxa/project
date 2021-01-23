@@ -1,0 +1,18 @@
+.time h1 {
+    font-size: l50px;
+    background-color: red;
+}
+.text-center {
+    text-align: center !important;
+}
+
+.div-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row{
+    width: 100%;
+    display: flex;
+}
