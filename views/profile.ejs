@@ -1,0 +1,71 @@
+<div class="jumbotron">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="/profile">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Posts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/users/logout">Logout</a>
+        </li>
+    </ul>
+    <div>
+        <div class="mt-4 col-lg-8 mx-auto">
+            <div class="card-header ">
+                <h1 class="text-center mt-3">
+                    Profile details
+                </h1>
+            </div>
+            <div class="card-body text-center">
+                <div>
+                    <h1> <i class="fas fa-user fa-3x mt-3 mb-4 text-dark"></i></h1>
+                </div>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr class="table-secondary">
+                            <th scope="row">username</th>
+                            <td>
+                                <%= user%>
+                            </td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <th scope="row">e-mail</th>
+                            <td>
+                                <%=email%>
+                            </td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <th scope="row">joined</th>
+                            <td>
+                                <%=date.toLocaleDateString()%>
+                            </td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td><button type="submit" class="btn btn-dark btn-block">change password</button></td>
+                            <td><button type="submit" class="btn btn-dark btn-block">delete account</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Cras justo odio
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Dapibus ac facilisis in
+                        <span class="badge badge-primary badge-pill">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Morbi leo risus
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
