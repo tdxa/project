@@ -23,11 +23,25 @@ router.get("/create", async (req, res) => {
 router.post("/create", async (req, res) => {
   const { title, content } = req.body;
   const postImage = req.file;
-  console.log(postImage);
+  let errors = [];
+
+  if (title.length === 0) {
+    errors.push({ msg: "Please enter the title" });
+  }
+
+  if (content.length === 0) {
+    errors.push({ msg: "Please enter the caption" });
+  }
 
   try {
     if (!postImage) {
-      //throw hands
+      errors.push({ msg: "Please choose an image" });
+    }
+
+    if (errors.length > 0) {
+      return res.render("create-post", {
+        errors,
+      });
     }
 
     const imageUrl = postImage.path;
@@ -39,9 +53,13 @@ router.post("/create", async (req, res) => {
       imageUrl,
       userId,
     });
+
     post.save();
   } catch (error) {
-    console.log(error);
+    errors.push({ msg: "Something went wrong! Please try again" });
+    res.render("create-post", {
+      errors,
+    });
   }
 });
 
@@ -61,11 +79,11 @@ router.delete("/:postId", async (req, res) => {
     const userId = req.session.passport?.user;
 
     if (!post) {
-      //throw hands
+      throw new Error("No post found");
     }
 
     if (userId.toString() !== post.userId.toString()) {
-      //throw hands
+      throw new Error("Post creator ID does not match");
     }
 
     res.json({ posts: posts });
@@ -85,9 +103,9 @@ router.get("/user", async (req, res) => {
   try {
     const posts = await Post.find({ userId: userId });
 
-    if (!posts) {
-      //throw hands
-    }
+    // if (!posts) {
+    //   throw new Error("No user posts found");
+    // }
 
     res.json({ posts: posts });
     // res.render()
@@ -102,9 +120,9 @@ router.get("/user/:userId", async (req, res) => {
   try {
     const posts = await Post.find({ userId: userId });
 
-    if (!posts) {
-      //throw hands
-    }
+    // if (!posts) {
+    //   throw new Error("No user posts found");
+    // }
 
     res.json({ posts: posts });
     // res.render()
