@@ -5,6 +5,7 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
 const multer = require("multer");
+const path = require("path");
 
 const app = express();
 
@@ -41,6 +42,9 @@ app.use(passport.session());
 //Connect flash
 app.use(flash());
 
+//Static folders
+app.use("images", express.static(path.join(__dirname, "images")));
+
 //Multer
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -57,7 +61,7 @@ const fileStorage = multer.diskStorage({
 //   cb(null, allowedFile);
 // };
 
-app.use(multer({ storage: fileStorage }).single("image"));
+app.use(multer({ storage: fileStorage }).single("postImage"));
 
 //Global variables
 app.use((req, res, next) => {
