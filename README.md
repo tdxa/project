@@ -1,20 +1,34 @@
 # Table of Contents
 1. [ About the project ](#about)
+   - [ Description ](#des)
+   - [Team](#team)
 2. [ App preview ](#preview)
 3. [ Built with ](#built)
 4. [ Usage ](#usage)
 
 <a name="about"></a>
-# Node.js login app
+# Node.js gallery app
+<a name="des"></a>
+### Description
 This is a complete authentication app built with Node.js, Express, Passport, Mongoose and some other packages. It's connected to the [MongoDB](https://www.mongodb.com/2) database.
 
-In the application, user can log in to his account and enter a personal dashborad. If the user doesn't have an account, he can register a new one. 
-If an unauthenticated person wants to access a personal dashboard, the application will open the login page with error massage displayed - `You must be logged in to view this page`.
+In the application, user can log in to his account and enter a personal dashborad where there is a gallery of posted photos of all users. If the user doesn't have an account, he can register a new one. The photo gallery on the dashboard allows the user to go to the subpage (by clicking on the name of the author of photo) where there are all photos added by the selected author.
+
+From the dashboard level, the user has option to go to the subpage of adding a new photo to the app and thus to display and manage all previously added photos, i.e. user can delete them from the application. Another subpage - of the account settings allows the user to view information about their profile, change their password or delete their profile.
+
+If an unauthenticated person wants to access a personal dashboard and subpages, the application will open the login page with error massage displayed - `You must be logged in to view this page`.
+
+
+<a name="team"></a>
+### Team:
+Project created by the team: \
+[👤 Anna Domańska](https://github.com/tdxa) \
+[👤 Krzysztof Dąbrowski] (https://github.com/IamCostello)\
 
 <a name="preview"></a>  
 # App preview
 <p align="center">
- <img src="https://user-images.githubusercontent.com/51888438/103378904-35c47b00-4ae4-11eb-9336-3eb3c6ec6ba3.gif" alt="gif"/>
+ <img src="https://user-images.githubusercontent.com/51888438/105636026-6dfe7580-5e66-11eb-8a51-fcce45e9472f.gif" alt="gif"/>
 </p>
 
 <a name="built"></a> 
