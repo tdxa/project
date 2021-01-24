@@ -94,20 +94,16 @@ router.get("/user", async (req, res) => {
   }
 });
 
-router.get("/user/:userId", async (req, res) => {
-  const userId = req.params.userId;
+router.get("/user/:username", async (req, res) => {
+  const username = req.params.username;
 
   try {
-    const posts = await Post.find({ "creator.userId": userId });
+    const posts = await Post.find({ "creator.username": username });
 
-    // if (!posts) {
-    //   throw new Error("No user posts found");
-    // }
-
-    // res.render("user-posts", {
-    //   user: req.user.name,
-    //   posts,
-    // });
+    res.render("users-posts", {
+      user: username,
+      posts,
+    });
   } catch (error) {
     console.log(error);
   }

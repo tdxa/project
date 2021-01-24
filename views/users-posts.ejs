@@ -1,0 +1,24 @@
+<div class="jumbotron">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" id="home" href="/dashboard">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/dashboard/user">My posts</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/profile">Settings</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/users/logout">Logout</a>
+    </li>
+  </ul>
+
+  <div class="d-flex flex-wrap">
+    <% posts.forEach(function(post){ %>
+      <%- include('user-photo', {post: post}); %>
+        <% }); %>
+  </div>
+</div>
+</div>
+<script type="text/javascript">window.onload = showClock();</script>

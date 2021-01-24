@@ -9,7 +9,7 @@
             <%= post.content%>
         </h4>
         <h6 class="text-center mt-3">
-            <%= post.creator.username%>
+            <a href="dashboard/user/<%= post.creator.username%>"><%= post.creator.username%></a>
         </h6>
     </div>
 </div>
