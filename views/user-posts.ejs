@@ -1,0 +1,55 @@
+<div class="jumbotron">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" id="home" href="/dashboard">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/dashboard/user">My posts</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/profile">Settings</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/users/logout">Logout</a>
+    </li>
+  </ul>
+  
+    <div class="row mt-5">
+      <div class="col-md-6 m-auto">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="text-center mt-3"><i class="fas fa-user-plus"></i>Create Post</h1>
+          </div>
+          <div class="card-body">
+            <%- include ('./partials/messages') %>
+              <form action="/dashboard/user" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" id="title" name="title" class="form-control" placeholder="Enter title"
+                    value="<%= typeof name != 'undefined' ? name : ''%>" />
+                </div>
+                <div class="form-group">
+                  <label for="content">caption</label>
+                  <input type="text" id="content" name="content" class="form-control" placeholder="Enter caption"
+                    value="<%= typeof email != 'undefined' ? email : ''%>" />
+                </div>
+                <div class="form-group">
+                  <label for="postImage">Image</label>
+                  <input type="file" id="postImage" name="postImage" class="form-control"
+                    value="<%= typeof password != 'undefined' ? password : ''%>" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row">
+      <% posts.forEach(function(post){ %>
+        <%- include('user-photo', {post: post}); %>
+          <% }); %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">window.onload = showClock();</script>

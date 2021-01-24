@@ -43,12 +43,12 @@ app.use(passport.session());
 app.use(flash());
 
 //Static folders
-app.use("images", express.static(path.join(__dirname, "images")));
+app.use(express.static(require("path").join(__dirname, "public")));
 
 //Multer
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "images");
+    cb(null, "public/images");
   },
   filename: (req, file, cb) => {
     cb(null, Math.random() + `-` + file.originalname);
@@ -74,7 +74,7 @@ app.use((req, res, next) => {
 //routes
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users.js"));
-app.use("/posts", require("./routes/posts.js"));
+app.use("/dashboard", require("./routes/posts.js"));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Example app listening on ${port} port!`));
