@@ -55,13 +55,18 @@ const fileStorage = multer.diskStorage({
   },
 });
 
-// const allowedMimeTypes = ["image/png", "image/jpg"];
-// const fileFilter = (req, file, cb) => {
-//   const allowedFile = allowedMimeTypes.includes(file.mimetype);
-//   cb(null, allowedFile);
-// };
+const allowedMimeTypes = ["image/png", "image/jpg","image/jpeg"];
+const fileFilter = (req, file, cb) => {
+  const allowedFile = allowedMimeTypes.includes(file.mimetype);
+  cb(null, allowedFile);
+};
 
-app.use(multer({ storage: fileStorage }).single("postImage"));
+
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single("postImage")
+);
+
+// app.use(multer({ storage: fileStorage }).single("postImage"));
 
 //Global variables
 app.use((req, res, next) => {
