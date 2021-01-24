@@ -22,8 +22,8 @@ If an unauthenticated person wants to access a personal dashboard and subpages, 
 <a name="team"></a>
 ### Team:
 Project created by the team: \
-[👤 Anna Domańska](https://github.com/tdxa) \
-[👤 Krzysztof Dąbrowski] (https://github.com/IamCostello)\
+[👤 Anna Domańska](https://github.com/tdxa) 
+[👤 Krzysztof Dąbrowski](https://github.com/IamCostello) 
 
 <a name="preview"></a>  
 # App preview
