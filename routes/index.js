@@ -3,7 +3,12 @@ const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
 
 // main page
-router.get("/", (req, res) => res.render("welcome"));
+router.get("/", (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/dashboard");
+  }
+  res.render("welcome");
+});
 
 // dashboard
 // router.get('/dashboard', ensureAuthenticated, (req, res) => res.render('dashboard', { user: req.user.name }));
