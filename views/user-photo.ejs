@@ -1,0 +1,20 @@
+<div class="card bg-secondary mb-3 border-secondary">
+  <div class="card-body">
+    <img src="/<%= post.imageUrl%>" alt="image" style="height: 250px;
+        width: 250px;">
+  </div>
+  <div class="card-header">
+    <h1 class="text-center mt-3">
+      <%= post.title%>
+    </h1>
+    <h1 class="text-center mt-3">
+      <%= post.content%>
+    </h1>
+    <h1 class="text-center mt-3">
+      <%= post.creator.username%>
+    </h1>
+  </div>
+  <form action="/dashboard/delete/<%= post._id%>" method="POST">
+    <button type="submit" class="btn btn-primary btn-block">delete</button>
+  </form>
+</div>
