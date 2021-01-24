@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
+const { ensureAuthenticated } = require("../config/auth");
+
 //user model
 const User = require('../models/User');
 const { db } = require('../models/User');
@@ -99,14 +101,14 @@ router.post("/login", (req, res, next) => {
 });
 
 // Logout handle
-router.get("/logout", (req, res) => {
+router.get("/logout", ensureAuthenticated, (req, res) => {
   req.logout();
   req.flash("success_msg", "You have been successfully logged out");
 
   res.redirect("/users/login");
 });
 
-router.get('/delete', (req, res) => {
+router.get('/delete',ensureAuthenticated, (req, res) => {
   User.findOneAndDelete(
     {
       _id: mongoose.Types.ObjectId(req.user.id)
@@ -118,7 +120,7 @@ router.get('/delete', (req, res) => {
 })
 
 
-router.get('/change', (req, res) => res.render("change"))
+router.get('/change',  ensureAuthenticated, (req, res) => res.render("change"))
 
 router.post('/change', (req, res) => {
   const { password, password2 } = req.body;
