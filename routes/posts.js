@@ -15,6 +15,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    res.redirect("/dashboard");
   }
 });
 
@@ -92,6 +93,7 @@ router.get("/user", ensureAuthenticated, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    res.redirect("/dashboard");
   }
 });
 
@@ -107,6 +109,7 @@ router.get("/user/:username", ensureAuthenticated, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    res.redirect("/dashboard");
   }
 });
 
@@ -121,15 +124,16 @@ router.post("/delete/:postId", ensureAuthenticated, async (req, res) => {
       throw new Error("No post found");
     }
 
-    // if (userId.toString() !== post.creator.userId.toString()) {
-    //   throw new Error("Post creator ID does not match");
-    // }
+    if (userId.toString() !== post.creator.userId.toString()) {
+      throw new Error("Post creator ID does not match");
+    }
 
     post.delete();
 
     res.redirect("/dashboard/user");
   } catch (error) {
     console.log(error);
+    res.redirect("/dashboard");
   }
 });
 
