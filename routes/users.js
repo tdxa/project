@@ -107,14 +107,52 @@ router.get("/logout", (req, res) => {
 });
 
 router.get('/delete', (req, res) => {
-    User.findOneAndDelete(
-        {
-            _id: mongoose.Types.ObjectId(req.user.id)
-        }
-    ).then(x => {
-        req.flash('success_msg', 'You have successfully deleted your account');
-        res.redirect('/');
-    })
+  User.findOneAndDelete(
+    {
+      _id: mongoose.Types.ObjectId(req.user.id)
+    }
+  ).then(x => {
+    req.flash('success_msg', 'You have successfully deleted your account');
+    res.redirect('/');
+  })
+})
+
+
+router.get('/change', (req, res) => res.render("change"))
+
+router.post('/change', (req, res) => {
+  const { password, password2 } = req.body;
+  let errors = [];
+
+
+  if (password !== password2) {
+    errors.push({ msg: "Passwords dont match" });
+  }
+
+  if (password.length < 6) {
+    errors.push({
+      msg: "Password is too short! Should be at least 6 characters.",
+    });
+  }
+
+  if (errors.length > 0) {
+    res.render("change");
+  } else {
+    bcrypt.genSalt(10, (error, salt) =>
+      bcrypt.hash(password, salt, (error, hash) => {
+        if (error) throw error;
+
+        let new_pass = hash;
+
+        User.findByIdAndUpdate(mongoose.Types.ObjectId(req.user.id),
+          { password: new_pass }
+        ).then(x => {
+          req.flash('success_msg', 'You have successfully change your password');
+          res.redirect('/users/login');
+        })
+      }
+    ))
+  }
 })
 
 module.exports = router;
