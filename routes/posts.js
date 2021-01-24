@@ -1,10 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Post = require("../models/Post.js");
+const { ensureAuthenticated } = require("../config/auth");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", ensureAuthenticated, async (req, res) => {
   try {
     const posts = await Post.find();
 
@@ -17,7 +18,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/user", async (req, res) => {
+router.post("/user", ensureAuthenticated, async (req, res) => {
   const { title, content } = req.body;
   const postImage = req.file;
   let errors = [];
@@ -79,7 +80,7 @@ router.post("/user", async (req, res) => {
 //   res.send("modify post with id");
 // });
 
-router.get("/user", async (req, res) => {
+router.get("/user", ensureAuthenticated, async (req, res) => {
   const userId = req.session.passport?.user;
 
   try {
@@ -94,7 +95,7 @@ router.get("/user", async (req, res) => {
   }
 });
 
-router.get("/user/:username", async (req, res) => {
+router.get("/user/:username", ensureAuthenticated, async (req, res) => {
   const username = req.params.username;
 
   try {
@@ -109,7 +110,7 @@ router.get("/user/:username", async (req, res) => {
   }
 });
 
-router.post("/delete/:postId", async (req, res) => {
+router.post("/delete/:postId", ensureAuthenticated, async (req, res) => {
   const postId = req.params.postId;
 
   try {
@@ -120,9 +121,9 @@ router.post("/delete/:postId", async (req, res) => {
       throw new Error("No post found");
     }
 
-    if (userId.toString() !== post.creator.userId.toString()) {
-      throw new Error("Post creator ID does not match");
-    }
+    // if (userId.toString() !== post.creator.userId.toString()) {
+    //   throw new Error("Post creator ID does not match");
+    // }
 
     post.delete();
 
